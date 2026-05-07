@@ -1,0 +1,7 @@
+run_id	baseline_type	model_slug	model_name	config_path	output_dir	seed
+qwen3_8b_topk	topk	qwen3_8b	Qwen/Qwen3-8B	experiments/llm_sentences_last_layer/configs/sae_baselines/train_topk.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk/qwen3_8b	42
+qwen3_8b_supervised	supervised	qwen3_8b	Qwen/Qwen3-8B	experiments/llm_sentences_last_layer/configs/sae_baselines/train_supervised.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/supervised/qwen3_8b	42
+olmo_13b_topk	topk	olmo_13b	allenai/OLMo-2-1124-13B	experiments/llm_sentences_last_layer/configs/sae_baselines/train_topk.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk/olmo_13b	42
+olmo_13b_supervised	supervised	olmo_13b	allenai/OLMo-2-1124-13B	experiments/llm_sentences_last_layer/configs/sae_baselines/train_supervised.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/supervised/olmo_13b	42
+gpt_oss_20b_topk	topk	gpt_oss_20b	openai/gpt-oss-20b	experiments/llm_sentences_last_layer/configs/sae_baselines/train_topk.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk/gpt_oss_20b	42
+gpt_oss_20b_supervised	supervised	gpt_oss_20b	openai/gpt-oss-20b	experiments/llm_sentences_last_layer/configs/sae_baselines/train_supervised.gin	experiments/llm_sentences_last_layer/checkpoints/sae_baselines/supervised/gpt_oss_20b	42

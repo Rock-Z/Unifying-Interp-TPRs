@@ -1,0 +1,32 @@
+# TopK SAE training config for ModernBERT sentence embeddings
+
+main.dataset_type = 'sentences'
+main.sentences_path = 'data/sentences/'
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base'
+main.embedding_cache_path = 'data/sentences/'
+main.role_scheme = 'svo'
+
+main.sae_config = {
+    'hidden_dim': 512,
+    'k': 16,
+    'dead_latent_threshold': 1e-6,
+}
+
+main.training_args = @train/TrainingArguments()
+
+train/TrainingArguments.output_dir = 'experiments/sae_sentences_topk/checkpoints/modernbert-embed-base'
+train/TrainingArguments.learning_rate = 5e-4
+train/TrainingArguments.warmup_ratio = 0.05
+train/TrainingArguments.num_train_epochs = 200
+train/TrainingArguments.save_total_limit = 1
+train/TrainingArguments.per_device_train_batch_size = 256
+train/TrainingArguments.per_device_eval_batch_size = 512
+train/TrainingArguments.eval_strategy = 'epoch'
+train/TrainingArguments.save_strategy = 'epoch'
+train/TrainingArguments.remove_unused_columns = False
+train/TrainingArguments.report_to = 'none'
+train/TrainingArguments.label_names = ['inputs_embeds']
+train/TrainingArguments.logging_dir = 'experiments/sae_sentences_topk/checkpoints/modernbert-embed-base/logs'
+
+main.resample_times = 5
+main.resample_threshold = 1

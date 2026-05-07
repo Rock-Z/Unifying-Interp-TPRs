@@ -1,0 +1,36 @@
+{
+  "holdout_step": 11,
+  "subject_holdout_offset": 0,
+  "object_holdout_offset": 5,
+  "voice": "active",
+  "subject_holdout_nouns": [
+    "professor",
+    "artist",
+    "ambassador",
+    "coach",
+    "gardener",
+    "musician",
+    "referee"
+  ],
+  "object_holdout_nouns": [
+    "secretary",
+    "engineer",
+    "barber",
+    "drummer",
+    "linguist",
+    "physicist",
+    "technician"
+  ],
+  "split_sizes": {
+    "train": 19600,
+    "valid": 2450,
+    "test": 2450,
+    "generalization": 5145
+  },
+  "examples_with_holdout_pair": {
+    "train": 0,
+    "valid": 0,
+    "test": 0,
+    "generalization": 5145
+  }
+}

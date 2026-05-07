@@ -1,0 +1,5 @@
+main.data_paths_dict = {
+    'train': 'data/digits/reverse_vocab_20_length_6_fixed.train',
+    'valid': 'data/digits/reverse_vocab_20_length_6_fixed.valid',
+    'test': 'data/digits/reverse_vocab_20_length_6_fixed.test'
+}

@@ -1,0 +1,19 @@
+# Parameters for generate_examples:
+# ==============================================================================
+generate_examples.doubly_ood = False
+generate_examples.max_seq_length = 6
+generate_examples.min_seq_length = 6
+generate_examples.vocab_size = 20
+
+# Parameters for main:
+# ==============================================================================
+main.data_dir = 'data/digits/'
+main.n_test = 5000
+main.n_train = 40000
+main.n_valid = 5000
+main.prefix = 'copy_vocab_20_length_6_fixed'
+main.random_seed = 12
+
+# Parameters for transform:
+# ==============================================================================
+transform.task = 'copy'

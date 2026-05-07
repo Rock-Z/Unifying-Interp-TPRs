@@ -1,0 +1,20 @@
+main.regularization = 'l2'
+main.reg_param = None
+main.role_pinv_l2_lambda = 1e-2
+main.role_sweep_range = [1, 2, 3, 4, 5, 6]
+main.role_unbinding = 'pinv'
+
+evaluate_probes_for_role.analytic_training_args = @analytic/TrainingArguments()
+analytic/TrainingArguments.per_device_eval_batch_size = 128
+analytic/TrainingArguments.remove_unused_columns = False
+analytic/TrainingArguments.report_to = 'none'
+
+evaluate_probes_for_role.trainable_training_args = @trainable/TrainingArguments()
+trainable/TrainingArguments.save_total_limit = 1
+trainable/TrainingArguments.per_device_train_batch_size = 256
+trainable/TrainingArguments.per_device_eval_batch_size = 256
+trainable/TrainingArguments.num_train_epochs = 5
+trainable/TrainingArguments.learning_rate = 5e-3
+trainable/TrainingArguments.save_strategy = 'epoch'
+trainable/TrainingArguments.remove_unused_columns = False
+trainable/TrainingArguments.report_to = 'none'

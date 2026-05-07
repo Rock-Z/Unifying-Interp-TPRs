@@ -1,0 +1,14 @@
+# Layerwise ModelBatch TPE training for allenai/OLMo-2-1124-13B (all decoder layers).
+include 'experiments/layerwise_decoder_tpe/configs/layerwise_tpe_modelbatch_base.gin'
+
+main.embedding_model_name = 'allenai/OLMo-2-1124-13B'
+
+main.tpe_config = {
+    'filler_dim': 128,
+    'role_dim': 8,
+    'aggregation': 'sum',
+    'has_linear_layer': True,
+}
+
+layerwise_tpe/TrainingArguments.output_dir = './experiments/layerwise_decoder_tpe/checkpoints/olmo-2-1124-13b_layers_all_modelbatch'
+layerwise_tpe/TrainingArguments.learning_rate = 0.001

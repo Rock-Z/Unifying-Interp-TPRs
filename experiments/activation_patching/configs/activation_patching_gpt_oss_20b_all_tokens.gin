@@ -1,0 +1,12 @@
+# Gin config for token-level activation patching on GPT-OSS-20B.
+
+activation_patching.run_activation_patching.sentences_path = 'data/sentences/data.test'
+activation_patching.run_activation_patching.output_dir = 'experiments/activation_patching/results/gpt-oss-20b-all-tokens'
+activation_patching.run_activation_patching.model_id = 'openai/gpt-oss-20b'
+activation_patching.run_activation_patching.device = 'cuda'
+activation_patching.run_activation_patching.dtype = 'bfloat16'
+activation_patching.run_activation_patching.max_trials = 12
+activation_patching.run_activation_patching.token_focus = 'all'
+activation_patching.run_activation_patching.layer_indices = None
+activation_patching.run_activation_patching.explicit_token_positions = None
+activation_patching.run_activation_patching.random_seed = 7

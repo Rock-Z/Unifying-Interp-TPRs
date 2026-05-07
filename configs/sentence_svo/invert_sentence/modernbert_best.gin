@@ -1,0 +1,42 @@
+# Gin config for SVO sentences inversion using ModernBERT embeddings and a pre-trained TPE checkpoint
+
+# === Inversion Script (invert_svo.py) Parameters ===
+main.sentences_path = 'data/sentences_multiple'
+main.role_scheme = 'svo'
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base'
+main.embedding_cache_path = 'data/sentences_multiple'
+
+# Provide the parent directory that contains 'best_model'
+main.tpe_path = 'experiments/sentences/checkpoints/modernbert/tpe'
+
+main.regularization = 'l2'
+main.reg_param = None  # If None, auto-set to sqrt(eval_loss)
+main.roles_to_eval = ('subj', 'obj')
+main.results_dir = 'results'
+
+
+# === TrainingArguments for Analytic Probe Evaluation ===
+main.analytic_training_args = @analytic/TrainingArguments()
+
+analytic/TrainingArguments.output_dir = './checkpoints/svo_analytic_eval/'
+analytic/TrainingArguments.per_device_eval_batch_size = 256
+analytic/TrainingArguments.remove_unused_columns = False
+analytic/TrainingArguments.report_to = 'none'
+
+
+# === TrainingArguments for Trainable Probe ===
+main.trainable_training_args = @trainable/TrainingArguments()
+
+trainable/TrainingArguments.output_dir = './checkpoints/svo_trainable_probe/'
+trainable/TrainingArguments.save_total_limit = 0
+trainable/TrainingArguments.per_device_train_batch_size = 256
+trainable/TrainingArguments.per_device_eval_batch_size = 256
+trainable/TrainingArguments.num_train_epochs = 50
+trainable/TrainingArguments.learning_rate = 5e-2
+trainable/TrainingArguments.logging_dir = './logs'
+trainable/TrainingArguments.save_strategy = 'no'
+trainable/TrainingArguments.remove_unused_columns = False
+trainable/TrainingArguments.report_to = 'none'
+
+
+

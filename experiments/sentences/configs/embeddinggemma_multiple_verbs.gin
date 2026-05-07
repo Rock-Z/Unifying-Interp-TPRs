@@ -1,0 +1,80 @@
+# Configuration for embeddinggemma with sentences_multiple dataset (best hparams)
+
+# === Dataset/embedding ===
+load_dataset_with_embeddings.entries_per_chunk = 50000
+main.sentences_path = 'data/sentences_multiple'
+main.embedding_cache_path = 'data/sentences_multiple'
+main.embedding_model_name = 'google/embeddinggemma-300m'
+main.role_scheme = 'svo'
+main.use_wandb = False
+main.random_seed = None
+
+# --- Main toggles ---
+main.skip_tpe = False
+main.skip_trainable_probe = False
+main.skip_analytic_probe = False
+main.tpe_back_projection = False
+main.tpe_decoding_loss = False
+
+# --- TPE configuration ---
+main.tpe_config = {
+    'filler_dim': 128,
+    'role_dim': 4,
+    'role_id': 0,
+}
+main.tpe_probe_config = {
+    'role_unbinding': 'pinv',
+    'filler_unbinding': 'pinv',
+}
+main.tpe_training_args = @tpe/TrainingArguments()
+
+# --- Probe configuration ---
+main.role_for_probe = 0
+main.probe_config_input = {
+    'encoder_model_type': 'sentence-transformers',
+}
+main.regularization_probe = 'l2'
+main.reg_param_probe = None # Auto derive
+main.probe_training_args = @trainable_probe/TrainingArguments()
+main.analytic_training_args = @analytic_probe_eval/TrainingArguments()
+
+# === TrainingArguments ===
+
+# --- TPE TrainingArguments ---
+tpe/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/embeddinggemma/tpe'
+tpe/TrainingArguments.num_train_epochs = 100
+tpe/TrainingArguments.learning_rate = 0.005
+tpe/TrainingArguments.per_device_train_batch_size = 256
+tpe/TrainingArguments.per_device_eval_batch_size = 256
+tpe/TrainingArguments.eval_strategy = 'epoch'
+tpe/TrainingArguments.save_strategy = 'epoch'
+tpe/TrainingArguments.load_best_model_at_end = True
+tpe/TrainingArguments.metric_for_best_model = 'eval_loss'
+tpe/TrainingArguments.greater_is_better = False
+tpe/TrainingArguments.lr_scheduler_type = 'cosine'
+tpe/TrainingArguments.save_total_limit = 1
+tpe/TrainingArguments.remove_unused_columns = False
+tpe/TrainingArguments.label_names = ['target_embeddings']
+tpe/TrainingArguments.report_to = 'none'
+
+# --- Trainable probe TrainingArguments ---
+trainable_probe/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/embeddinggemma/probe'
+trainable_probe/TrainingArguments.num_train_epochs = 50
+trainable_probe/TrainingArguments.learning_rate = 0.01
+trainable_probe/TrainingArguments.per_device_train_batch_size = 256
+trainable_probe/TrainingArguments.per_device_eval_batch_size = 256
+trainable_probe/TrainingArguments.lr_scheduler_type = 'cosine'
+trainable_probe/TrainingArguments.eval_strategy = 'epoch'
+trainable_probe/TrainingArguments.save_strategy = 'epoch'
+trainable_probe/TrainingArguments.load_best_model_at_end = False
+trainable_probe/TrainingArguments.metric_for_best_model = None
+trainable_probe/TrainingArguments.greater_is_better = True
+trainable_probe/TrainingArguments.save_total_limit = 1
+trainable_probe/TrainingArguments.remove_unused_columns = False
+trainable_probe/TrainingArguments.report_to = 'none'
+
+# --- Analytic probe eval TrainingArguments ---
+analytic_probe_eval/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/embeddinggemma/'
+analytic_probe_eval/TrainingArguments.per_device_eval_batch_size = 256
+analytic_probe_eval/TrainingArguments.remove_unused_columns = False
+analytic_probe_eval/TrainingArguments.report_to = 'none'

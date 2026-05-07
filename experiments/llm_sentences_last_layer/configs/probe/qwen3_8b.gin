@@ -1,0 +1,31 @@
+main.sentences_path = 'data/sentences'
+main.embedding_cache_path = 'data/sentences'
+main.embedding_model_name = 'Qwen/Qwen3-8B'
+main.role_scheme = 'svo'
+main.tpe_path = 'experiments/llm_sentences_last_layer/checkpoints/tpe/qwen3_8b'
+main.regularization = 'l2'
+main.reg_param = None
+main.reg_param_sample_size = 128
+main.roles_to_eval = ('subj', 'verb', 'obj')
+main.results_dir = 'experiments/llm_sentences_last_layer/results/probe/qwen3_8b'
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'
+
+main.analytic_training_args = @analytic/TrainingArguments()
+analytic/TrainingArguments.output_dir = 'experiments/llm_sentences_last_layer/checkpoints/probe/qwen3_8b/analytic'
+analytic/TrainingArguments.per_device_eval_batch_size = 256
+analytic/TrainingArguments.remove_unused_columns = False
+analytic/TrainingArguments.report_to = 'none'
+
+main.trainable_training_args = @trainable/TrainingArguments()
+trainable/TrainingArguments.output_dir = 'experiments/llm_sentences_last_layer/checkpoints/probe/qwen3_8b/trainable'
+trainable/TrainingArguments.save_total_limit = 1
+trainable/TrainingArguments.per_device_train_batch_size = 256
+trainable/TrainingArguments.per_device_eval_batch_size = 256
+trainable/TrainingArguments.num_train_epochs = 50
+trainable/TrainingArguments.learning_rate = 0.005
+trainable/TrainingArguments.lr_scheduler_type = 'constant'
+trainable/TrainingArguments.save_strategy = 'epoch'
+trainable/TrainingArguments.remove_unused_columns = False
+trainable/TrainingArguments.report_to = 'none'

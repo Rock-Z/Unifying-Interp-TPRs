@@ -1,0 +1,32 @@
+main.dataset_type = 'sentences'
+main.sentences_path = 'data/sentences'
+main.embedding_cache_path = 'data/sentences'
+main.role_scheme = 'svo'
+main.feature_mode = 'filler_role'
+main.random_seed = 42
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'
+
+main.sae_config = {
+    'hidden_dim': 512,
+    'k': 16,
+    'dead_latent_threshold': 1e-6,
+}
+
+main.training_args = @transformers/TrainingArguments()
+transformers/TrainingArguments.output_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk/placeholder'
+transformers/TrainingArguments.learning_rate = 5e-4
+transformers/TrainingArguments.warmup_ratio = 0.05
+transformers/TrainingArguments.num_train_epochs = 100
+transformers/TrainingArguments.save_total_limit = 1
+transformers/TrainingArguments.per_device_train_batch_size = 256
+transformers/TrainingArguments.per_device_eval_batch_size = 512
+transformers/TrainingArguments.eval_strategy = 'no'
+transformers/TrainingArguments.save_strategy = 'no'
+transformers/TrainingArguments.remove_unused_columns = False
+transformers/TrainingArguments.report_to = 'none'
+transformers/TrainingArguments.label_names = ['inputs_embeds']
+
+main.resample_times = 5
+main.resample_threshold = 1

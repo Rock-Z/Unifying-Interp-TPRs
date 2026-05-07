@@ -1,0 +1,19 @@
+# Probe comparison for heldout digits copy GRU (all token positions).
+include 'experiments/digits_probe/configs/1le64h256_fixed_len_6_l2r_regularized/includes/common_base.gin'
+
+main.data_paths_dict = {
+    'train': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.train',
+    'valid': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.valid',
+    'test': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.test',
+    'generalization': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.generalization',
+}
+main.seq2seq_path = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/seq2seq/copy/gru'
+main.tpe_path = 'experiments/digits/filler_role_holdout/checkpoints/tpe/copy_gru'
+main.heldout_pairs = [(2, 1), (7, 2), (13, 3), (4, 4), (18, 5), (10, 6)]
+main.generalization_eval_split_name = 'generalization'
+main.results_dir = 'experiments/digits_probe/results/filler_role_holdout/copy_gru'
+
+analytic/TrainingArguments.output_dir = 'experiments/digits_probe/checkpoints/analytic/filler_role_holdout/copy_gru'
+
+trainable/TrainingArguments.output_dir = 'experiments/digits_probe/checkpoints/trainable_probe/filler_role_holdout/copy_gru'
+trainable/TrainingArguments.logging_dir = 'experiments/digits_probe/logs/trainable_probe/filler_role_holdout/copy_gru'

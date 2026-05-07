@@ -1,0 +1,12 @@
+# Gin config for token-level activation patching on OLMo-2-1124-13B.
+
+activation_patching.run_activation_patching.sentences_path = 'data/sentences/data.test'
+activation_patching.run_activation_patching.output_dir = 'experiments/activation_patching/results/olmo-2-1124-13b-all-tokens'
+activation_patching.run_activation_patching.model_id = 'allenai/OLMo-2-1124-13B'
+activation_patching.run_activation_patching.device = 'cuda'
+activation_patching.run_activation_patching.dtype = 'bfloat16'
+activation_patching.run_activation_patching.max_trials = 12
+activation_patching.run_activation_patching.token_focus = 'all'
+activation_patching.run_activation_patching.layer_indices = None
+activation_patching.run_activation_patching.explicit_token_positions = None
+activation_patching.run_activation_patching.random_seed = 7

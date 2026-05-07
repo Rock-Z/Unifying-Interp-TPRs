@@ -1,0 +1,10 @@
+run_id	model_slug	model_name	learning_rate	weight_decay	warmup_ratio	batch_size	num_train_epochs	seed	output_dir
+qwen3_8b_cosf256_lr1e3	qwen3_8b	Qwen/Qwen3-8B	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/qwen3_8b/lr1e3
+qwen3_8b_cosf256_lr2e3	qwen3_8b	Qwen/Qwen3-8B	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/qwen3_8b/lr2e3
+qwen3_8b_cosf256_lr4e3	qwen3_8b	Qwen/Qwen3-8B	0.004	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/qwen3_8b/lr4e3
+olmo_13b_cosf256_lr1e3	olmo_13b	allenai/OLMo-2-1124-13B	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/olmo_13b/lr1e3
+olmo_13b_cosf256_lr2e3	olmo_13b	allenai/OLMo-2-1124-13B	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/olmo_13b/lr2e3
+olmo_13b_cosf256_lr4e3	olmo_13b	allenai/OLMo-2-1124-13B	0.004	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/olmo_13b/lr4e3
+gpt_oss_20b_cosf256_lr1e3	gpt_oss_20b	openai/gpt-oss-20b	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/gpt_oss_20b/lr1e3
+gpt_oss_20b_cosf256_lr2e3	gpt_oss_20b	openai/gpt-oss-20b	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/gpt_oss_20b/lr2e3
+gpt_oss_20b_cosf256_lr4e3	gpt_oss_20b	openai/gpt-oss-20b	0.004	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps_cosine_f256/gpt_oss_20b/lr4e3

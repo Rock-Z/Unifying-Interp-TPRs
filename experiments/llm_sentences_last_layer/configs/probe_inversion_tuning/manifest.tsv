@@ -1,0 +1,4 @@
+model_slug	model_name	tpe_path	output_path
+qwen3_8b	Qwen/Qwen3-8B	experiments/llm_sentences_last_layer/checkpoints/tpe/qwen3_8b	experiments/llm_sentences_last_layer/checkpoints/probe_inversion_tuning/qwen3_8b/grid.json
+olmo_13b	allenai/OLMo-2-1124-13B	experiments/llm_sentences_last_layer/checkpoints/tpe/olmo_13b	experiments/llm_sentences_last_layer/checkpoints/probe_inversion_tuning/olmo_13b/grid.json
+gpt_oss_20b	openai/gpt-oss-20b	experiments/llm_sentences_last_layer/checkpoints/tpe/gpt_oss_20b	experiments/llm_sentences_last_layer/checkpoints/probe_inversion_tuning/gpt_oss_20b/grid.json

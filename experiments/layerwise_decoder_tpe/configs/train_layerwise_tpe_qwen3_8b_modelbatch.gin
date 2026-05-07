@@ -1,0 +1,47 @@
+# Layerwise decoder TPE training with ModelBatch for Qwen/Qwen3-8B layers 0-6
+
+# Main configuration
+main.sentences_path = 'data/sentences'
+main.embedding_model_name = 'Qwen/Qwen3-8B'
+main.embedding_cache_path = 'data/sentences'
+main.layer_indices = 'all'
+main.role_scheme = 'svo'
+main.random_seed = 7
+main.max_examples_per_split = None
+main.use_wandb = False
+
+# Control dtype for decoder LM used in embedding extraction via gin
+AutoModelForCausalLM.from_pretrained.torch_dtype = 'bfloat16'
+
+# TPE model hyperparameters (hidden_size is filled in automatically)
+main.tpe_config = {
+    'filler_dim': 128,
+    'role_dim': 4,
+    'aggregation': 'sum',
+    'has_linear_layer': True,
+}
+
+# TrainingArguments for batched layerwise run
+main.tpe_training_args = @layerwise_tpe/TrainingArguments()
+
+layerwise_tpe/TrainingArguments.output_dir = './experiments/layerwise_decoder_tpe/checkpoints/qwen3-8b_layers_all_modelbatch/'
+layerwise_tpe/TrainingArguments.learning_rate = 0.002
+layerwise_tpe/TrainingArguments.weight_decay = 0.0
+layerwise_tpe/TrainingArguments.warmup_ratio = 0.0
+layerwise_tpe/TrainingArguments.per_device_train_batch_size = 256
+layerwise_tpe/TrainingArguments.num_train_epochs = 100
+layerwise_tpe/TrainingArguments.do_train = True
+layerwise_tpe/TrainingArguments.do_eval = True
+layerwise_tpe/TrainingArguments.load_best_model_at_end = True
+layerwise_tpe/TrainingArguments.metric_for_best_model = 'eval_loss'
+layerwise_tpe/TrainingArguments.greater_is_better = False
+layerwise_tpe/TrainingArguments.eval_strategy = 'epoch'
+layerwise_tpe/TrainingArguments.save_strategy = 'epoch'
+layerwise_tpe/TrainingArguments.save_total_limit = 1
+layerwise_tpe/TrainingArguments.save_safetensors = True
+layerwise_tpe/TrainingArguments.per_device_eval_batch_size = 256
+layerwise_tpe/TrainingArguments.seed = 42
+layerwise_tpe/TrainingArguments.logging_strategy = 'steps'
+layerwise_tpe/TrainingArguments.logging_steps = 200
+layerwise_tpe/TrainingArguments.report_to = 'none'  # set to 'wandb' if main.use_wandb = True
+layerwise_tpe/TrainingArguments.lr_scheduler_type = 'cosine'

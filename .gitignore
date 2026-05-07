@@ -1,0 +1,92 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.vscode
+
+# Artifacts
+checkpoints/
+experiments/**/checkpoints/
+experiments/**/logs/
+experiments/**/analytic_sae/
+experiments/**/probe/results/
+experiments/**/probe/logs/
+experiments/**/probe/checkpoints/
+experiments/**/probe_checkpoints/
+experiments/**/probe_results/
+experiments/**/runs/
+experiments/**/results_archived/
+experiments/**/analytic_debug/
+experiments/**/plots/
+experiments/**/figures/
+experiments/**/visualizations/
+experiments/**/eval_results/
+experiments/**/sweeps/logs/
+experiments/**/checkpoints_best/
+experiments/**/results_best/
+experiments/**/accuracy_grid*.png
+experiments/llm_sentences_last_layer/results/analogy/
+experiments/llm_sentences_last_layer/results/probe/
+experiments/llm_sentences_last_layer/results/probe_seed_check/
+experiments/llm_sentences_last_layer/results/sae/
+
+# marimo
+__marimo__/
+
+# wandb
+wandb/
+
+# logs
+logs/
+
+# slurm
+slurm*.out
+experiments/debug-digits-heldout-nontrained/additive_decode_gpu-*.out
+experiments/debug-digits-heldout-vs-nonheldout-tpe/geometry-*.out
+
+# embeddings cache
+data/**/*.json 
+!data/**/*.holdout_metadata.json
+data/**/*.pt
+data/**/*.json.bak
+
+results/
+!experiments/llm_sentences_last_layer/results/
+!experiments/llm_sentences_last_layer/results/summary/
+!experiments/llm_sentences_last_layer/results/summary/*.json
+!experiments/llm_sentences_last_layer/results/summary/*.md
+!experiments/llm_sentences_last_layer/results/summary/figures/
+!experiments/llm_sentences_last_layer/results/summary/figures/*.pdf
+!experiments/llm_sentences_last_layer/results/summary/figures/*.png
+
+# pytest and hypothesis
+.hypothesis/
+.pytest_cache/
+
+# tmp
+.tmp/
+.codex
+.codex/
+
+# Generated holdout experiment payloads
+experiments/filler-role-holdout/digits-analogy/*.csv
+experiments/filler-role-holdout/digits-analogy/*.json
+experiments/filler-role-holdout/digits-analogy/*.md
+experiments/filler-role-holdout/digits-probe/**/*.gin
+experiments/filler-role-holdout/digits-probe/**/*.json
+experiments/filler-role-holdout/digits-probe/**/*.pdf
+experiments/filler-role-holdout/digits-probe/**/*.png
+experiments/filler-role-holdout/digits-probe/*.json
+experiments/filler-role-holdout/digits-probe/*.md
+experiments/filler-role-holdout/summary.md
+
+# Nested/external repos kept out of this parent repo
+TPRs-ICML/
+src/path-patching/
+writeup/

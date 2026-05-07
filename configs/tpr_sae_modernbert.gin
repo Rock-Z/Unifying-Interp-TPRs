@@ -1,0 +1,22 @@
+# Construct analytic SAE from modernbert-aligned TPE checkpoint
+
+main.tpe_checkpoint_dir = 'experiments/sentences/checkpoints/modernbert/tpe/best_model'
+main.sae_output_dir = 'experiments/sae/results/modernbert'
+main.data_path = 'data/sentences_multiple'
+main.dataset_type = 'sentences'
+main.role_scheme = 'svo'
+main.batch_size = 32
+
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base'
+main.embedding_cache_path = 'data/sentences_multiple'
+
+main.sae_config = {
+    'sparsity_penalty': 0.0,
+    'dead_latent_threshold': 0.01,
+}
+
+main.tpe_output_layer_regularization = 'l2'
+main.tpe_output_layer_regularization_value = 1e-6
+main.filler_unbinding = 'pinv'
+main.role_unbinding = 'pinv'
+main.role_invariant = False

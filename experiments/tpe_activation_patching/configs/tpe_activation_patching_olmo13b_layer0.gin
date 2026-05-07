@@ -1,0 +1,15 @@
+# Gin config for TPE-driven activation patching on OLMo-2-1124-13B (layer 0).
+
+tpe_activation_patching.run_tpe_activation_patching.sentences_path = 'data/sentences/data.test'
+tpe_activation_patching.run_tpe_activation_patching.output_dir = 'results/tpe_activation_patching/olmo-2-1124-13b-layer0'
+tpe_activation_patching.run_tpe_activation_patching.model_id = 'allenai/OLMo-2-1124-13B'
+tpe_activation_patching.run_tpe_activation_patching.device = 'cuda'
+tpe_activation_patching.run_tpe_activation_patching.dtype = 'bfloat16'
+tpe_activation_patching.run_tpe_activation_patching.tpe_checkpoint_path = 'experiments/layerwise_decoder_tpe/checkpoints/olmo-2-1124-13b_layers_all_modelbatch/layer0/best_model'
+tpe_activation_patching.run_tpe_activation_patching.tpe_device = 'cuda'
+tpe_activation_patching.run_tpe_activation_patching.tpe_dtype = 'float32'
+tpe_activation_patching.run_tpe_activation_patching.max_trials = 12
+tpe_activation_patching.run_tpe_activation_patching.token_focus = 'all'
+tpe_activation_patching.run_tpe_activation_patching.layer_indices = None
+tpe_activation_patching.run_tpe_activation_patching.explicit_token_positions = None
+tpe_activation_patching.run_tpe_activation_patching.random_seed = 7

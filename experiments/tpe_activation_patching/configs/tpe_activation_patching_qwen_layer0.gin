@@ -1,0 +1,15 @@
+# Gin config to run TPE-driven activation patching on Qwen3-8B layer 0.
+
+tpe_activation_patching.run_tpe_activation_patching.sentences_path = 'data/sentences/data.test'
+tpe_activation_patching.run_tpe_activation_patching.output_dir = 'experiments/tpe_activation_patching/results/qwen3-8b-layer0'
+tpe_activation_patching.run_tpe_activation_patching.model_id = 'Qwen/Qwen3-8B'
+tpe_activation_patching.run_tpe_activation_patching.device = 'cuda'
+tpe_activation_patching.run_tpe_activation_patching.dtype = 'bfloat16'
+tpe_activation_patching.run_tpe_activation_patching.tpe_checkpoint_path = 'checkpoints/layerwise_tpe/qwen3-8b/layer0/best_model'
+tpe_activation_patching.run_tpe_activation_patching.tpe_device = 'cuda'
+tpe_activation_patching.run_tpe_activation_patching.tpe_dtype = 'float32'
+tpe_activation_patching.run_tpe_activation_patching.max_trials = 12
+tpe_activation_patching.run_tpe_activation_patching.token_focus = 'passive_clause'
+tpe_activation_patching.run_tpe_activation_patching.layer_indices = None  # defaults to TPE layer id
+tpe_activation_patching.run_tpe_activation_patching.explicit_token_positions = None
+tpe_activation_patching.run_tpe_activation_patching.random_seed = 7

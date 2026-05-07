@@ -1,0 +1,67 @@
+project: sae-llm-punctuation-topk-gpt-oss-20b
+name: sae-topk-llm-punctuation-gpt-oss-20b
+method: bayes
+metric:
+  name: avg_feature_well_rankedness
+  goal: maximize
+parameters:
+  sae_lr:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 5e-3
+  sae_resample_times:
+    values: [2, 5, 8]
+  sae_k:
+    values: [8, 16, 32, 64, 128]
+  sae_hidden_dim:
+    values: [512, 1024, 2048, 4096]
+  sae_batch:
+    values: [128, 256]
+command:
+  - ${env}
+  - uv
+  - run
+  - scripts/wandb_script_launcher.py
+  - src/train_sae.py
+  - experiments/llm_sentences_last_layer/sweeps/sae_topk_gpt_oss_20b.yaml
+  - --sae_lr=${sae_lr}
+  - --sae_resample_times=${sae_resample_times}
+  - --sae_k=${sae_k}
+  - --sae_hidden_dim=${sae_hidden_dim}
+  - --sae_batch=${sae_batch}
+gin_template: |
+  # TopK SAE sweep for GPT-OSS-20B final punctuation-token hidden states.
+  main.dataset_type = 'sentences'
+  main.sentences_path = 'data/sentences'
+  main.embedding_model_name = 'openai/gpt-oss-20b'
+  main.embedding_cache_path = 'data/sentences'
+  main.role_scheme = 'svo'
+  main.feature_mode = 'filler_role'
+  main.random_seed = 42
+
+  load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+  load_dataset_with_embeddings.device = 'cpu'
+
+  main.sae_config = {
+      'hidden_dim': $sae_hidden_dim,
+      'k': $sae_k,
+      'dead_latent_threshold': 1e-6,
+  }
+
+  main.training_args = @transformers/TrainingArguments()
+  transformers/TrainingArguments.output_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk_wandb/gpt_oss_20b/run-$wandb_run_id'
+  transformers/TrainingArguments.learning_rate = $sae_lr
+  transformers/TrainingArguments.warmup_ratio = 0.05
+  transformers/TrainingArguments.num_train_epochs = 200
+  transformers/TrainingArguments.save_total_limit = 1
+  transformers/TrainingArguments.per_device_train_batch_size = $sae_batch
+  transformers/TrainingArguments.per_device_eval_batch_size = 512
+  transformers/TrainingArguments.eval_strategy = 'epoch'
+  transformers/TrainingArguments.save_strategy = 'epoch'
+  transformers/TrainingArguments.remove_unused_columns = False
+  transformers/TrainingArguments.report_to = 'wandb'
+  transformers/TrainingArguments.label_names = ['inputs_embeds']
+  transformers/TrainingArguments.logging_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae_baselines/topk_wandb/gpt_oss_20b/run-$wandb_run_id/logs'
+
+  main.resample_times = $sae_resample_times
+  main.resample_threshold = 1

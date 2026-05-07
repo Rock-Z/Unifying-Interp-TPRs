@@ -1,0 +1,3 @@
+
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base'
+main.tpe_checkpoint_dir = 'experiments/sentences/checkpoints/modernbert/tpe/best_model'

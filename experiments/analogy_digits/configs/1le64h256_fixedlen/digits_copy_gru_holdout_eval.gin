@@ -1,0 +1,15 @@
+main.data_paths_dict = {
+    'train': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.train',
+    'valid': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.valid',
+    'test': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.test',
+    'generalization': 'data/digits/copy_vocab_20_length_6_fixed_filler_role_holdout.generalization',
+}
+main.seq2seq_checkpoint_dir = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/seq2seq/copy/gru/best_model'
+main.tpe_checkpoint_dir = 'experiments/digits/filler_role_holdout/checkpoints/tpe/copy_gru/best_model'
+main.max_analogies = 1000
+main.random_seed = 6235
+main.verbose = True
+main.print_examples = 3
+main.evaluation_mode = 'both'
+main.heldout_pairs = [(2, 1), (7, 2), (13, 3), (4, 4), (18, 5), (10, 6)]
+main.output_path = 'experiments/analogy_digits/results/filler_role_holdout/digits_copy_gru_eval.json'

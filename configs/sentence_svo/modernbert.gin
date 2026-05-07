@@ -1,0 +1,5 @@
+
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base' # Used for TPE targets and Probe input features
+
+tpe/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/modernbert/tpe'
+trainable_probe/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/modernbert/probe'

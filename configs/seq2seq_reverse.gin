@@ -1,0 +1,9 @@
+main.wandb_configs = {
+    'group': "reverse_vocab_100_length_6",
+}
+
+main.data_paths_dict = {
+    'train': 'data/digits/reverse_vocab_100_length_6.train',
+    'valid': 'data/digits/reverse_vocab_100_length_6.valid',
+    'test': 'data/digits/reverse_vocab_100_length_6.test'
+}

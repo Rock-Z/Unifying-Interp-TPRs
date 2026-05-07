@@ -1,0 +1,10 @@
+run_id	model_slug	model_name	learning_rate	weight_decay	warmup_ratio	batch_size	epochs	seed	output_dir
+qwen3_8b_lr5e4	qwen3_8b	Qwen/Qwen3-8B	0.0005	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/qwen3_8b/lr5e4
+qwen3_8b_lr1e3	qwen3_8b	Qwen/Qwen3-8B	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/qwen3_8b/lr1e3
+qwen3_8b_lr2e3	qwen3_8b	Qwen/Qwen3-8B	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/qwen3_8b/lr2e3
+olmo_13b_lr5e4	olmo_13b	allenai/OLMo-2-1124-13B	0.0005	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/olmo_13b/lr5e4
+olmo_13b_lr1e3	olmo_13b	allenai/OLMo-2-1124-13B	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/olmo_13b/lr1e3
+olmo_13b_lr2e3	olmo_13b	allenai/OLMo-2-1124-13B	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/olmo_13b/lr2e3
+gpt_oss_20b_lr5e4	gpt_oss_20b	openai/gpt-oss-20b	0.0005	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/gpt_oss_20b/lr5e4
+gpt_oss_20b_lr1e3	gpt_oss_20b	openai/gpt-oss-20b	0.001	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/gpt_oss_20b/lr1e3
+gpt_oss_20b_lr2e3	gpt_oss_20b	openai/gpt-oss-20b	0.002	0.0	0.0	256	100	42	experiments/llm_sentences_last_layer/checkpoints/tpe_sweeps/gpt_oss_20b/lr2e3

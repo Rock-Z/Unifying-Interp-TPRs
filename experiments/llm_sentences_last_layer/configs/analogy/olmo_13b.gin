@@ -1,0 +1,14 @@
+main.sentences_path = 'data/sentences'
+main.embedding_cache_path = 'data/sentences'
+main.embedding_model_name = 'allenai/OLMo-2-1124-13B'
+main.role_scheme = 'svo'
+main.max_analogies = None
+main.output_path = 'experiments/llm_sentences_last_layer/results/analogy/olmo_13b/eval.json'
+main.random_seed = 42
+main.verbose = True
+main.print_examples = 3
+main.tpe_checkpoint_dir = 'experiments/llm_sentences_last_layer/checkpoints/tpe/olmo_13b/best_model'
+main.evaluation_mode = 'both'
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'

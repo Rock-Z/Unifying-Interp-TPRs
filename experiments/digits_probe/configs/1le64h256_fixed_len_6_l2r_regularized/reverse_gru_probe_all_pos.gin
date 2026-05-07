@@ -1,0 +1,12 @@
+# Probe comparison for digits reverse GRU (all token positions).
+include 'experiments/digits_probe/configs/1le64h256_fixed_len_6_l2r_regularized/includes/common_base.gin'
+include 'experiments/digits_probe/configs/1le64h256_fixed_len_6_l2r_regularized/includes/task_reverse.gin'
+
+main.seq2seq_path = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/seq2seq/reverse/gru'
+main.tpe_path = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/tpe/reverse/gru'
+main.results_dir = 'experiments/digits_probe/results/1le64h256_fixed_len_6_l2r_regularized/reverse_gru'
+
+analytic/TrainingArguments.output_dir = 'experiments/digits_probe/checkpoints/analytic/1le64h256_fixed_len_6_l2r_aligned/reverse_gru'
+
+trainable/TrainingArguments.output_dir = 'experiments/digits_probe/checkpoints/trainable_probe/1le64h256_fixed_len_6_l2r_aligned/reverse_gru'
+trainable/TrainingArguments.logging_dir = 'experiments/digits_probe/logs/trainable_probe/1le64h256_fixed_len_6_l2r_aligned/reverse_gru'

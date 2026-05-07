@@ -1,0 +1,47 @@
+# Base gin config for layerwise decoder-only TPE training.
+
+main.sentences_path = 'data/sentences'
+main.embedding_model_name = 'Qwen/Qwen3-8B'
+main.embedding_cache_path = 'data/sentences'
+main.layer_indices = [1]
+main.role_scheme = 'svo'
+main.random_seed = 7
+main.max_examples_per_split = None
+main.use_wandb = False
+main.wandb_project = None
+main.wandb_entity = None
+main.wandb_group = None
+main.wandb_run_name = None
+main.wandb_tags = None
+
+transformers/EarlyStoppingCallback.early_stopping_patience = 5
+
+main.tpe_config = {
+    'filler_dim': 128,
+    'role_dim': 4,
+    'aggregation': 'sum',
+    'has_linear_layer': True,
+}
+
+main.tpe_training_args = @tpe/TrainingArguments()
+tpe/TrainingArguments.output_dir = './experiments/layerwise_decoder_tpe/checkpoints/qwen3-8b_layer1'
+tpe/TrainingArguments.learning_rate = 0.002
+tpe/TrainingArguments.weight_decay = 0.0
+tpe/TrainingArguments.warmup_ratio = 0.0
+tpe/TrainingArguments.per_device_train_batch_size = 256
+tpe/TrainingArguments.num_train_epochs = 100
+tpe/TrainingArguments.do_train = True
+tpe/TrainingArguments.do_eval = True
+tpe/TrainingArguments.load_best_model_at_end = True
+tpe/TrainingArguments.metric_for_best_model = 'eval_loss'
+tpe/TrainingArguments.greater_is_better = False
+tpe/TrainingArguments.save_strategy = 'epoch'
+tpe/TrainingArguments.eval_strategy = 'epoch'
+tpe/TrainingArguments.logging_strategy = 'steps'
+tpe/TrainingArguments.logging_steps = 200
+tpe/TrainingArguments.report_to = 'none'
+tpe/TrainingArguments.lr_scheduler_type = 'cosine'
+tpe/TrainingArguments.save_total_limit = 1
+tpe/TrainingArguments.save_safetensors = True
+tpe/TrainingArguments.per_device_eval_batch_size = 256
+tpe/TrainingArguments.seed = 42

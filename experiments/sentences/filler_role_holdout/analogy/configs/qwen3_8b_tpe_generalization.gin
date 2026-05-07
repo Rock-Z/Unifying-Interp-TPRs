@@ -1,0 +1,13 @@
+main.sentences_path = 'data/sentences_multiple_filler_role_holdout'
+main.embedding_cache_path = 'data/sentences_multiple_filler_role_holdout'
+main.embedding_model_name = 'Qwen/Qwen3-Embedding-8B'
+main.role_scheme = 'svo'
+main.max_analogies = None
+main.output_path = 'experiments/sentences/filler_role_holdout/analogy/results/qwen3_8b_tpe_generalization.json'
+main.random_seed = 42
+main.verbose = True
+main.print_examples = 3
+main.tpe_checkpoint_dir = 'experiments/sentences/filler_role_holdout/checkpoints/qwen3-8B/tpe/best_model'
+main.evaluation_mode = 'tpe'
+main.analogy_split = 'generalization'
+main.candidate_splits = ('train', 'valid', 'test', 'generalization')

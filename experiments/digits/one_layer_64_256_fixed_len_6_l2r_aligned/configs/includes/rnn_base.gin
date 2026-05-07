@@ -1,0 +1,23 @@
+seq2seq_init.encoder_config = {
+    'architecture': 'RNN',
+    'embedding_size': 64,
+    'hidden_size': 256,
+    'n_layers': 1,
+    'dropout': 0
+}
+
+seq2seq_init.decoder_config = {
+    'architecture': 'RNN',
+    'embedding_size': 64,
+    'hidden_size': 256,
+    'n_layers': 1,
+    'dropout': 0
+}
+
+main.tpe_config = {
+    'hidden_size': 256,
+    'n_roles': 9,
+    'filler_dim': 64,
+    'role_dim': 32,
+    'role_scheme': 'l2r',
+}

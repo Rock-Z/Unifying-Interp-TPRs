@@ -1,0 +1,31 @@
+main.tpe_checkpoint_dir = 'experiments/llm_sentences_last_layer/checkpoints/tpe/qwen3_8b/best_model'
+main.sae_output_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae/qwen3_8b'
+main.data_path = 'data/sentences'
+main.dataset_type = 'sentences'
+main.role_scheme = 'svo'
+main.batch_size = 256
+main.embedding_model_name = 'Qwen/Qwen3-8B'
+main.embedding_cache_path = 'data/sentences'
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'
+
+main.sae_config = {
+    'sparsity_penalty': 0.0,
+    'dead_latent_threshold': 0.01,
+}
+
+main.tpe_output_layer_regularization = 'l2'
+main.tpe_output_layer_regularization_value = 'auto'
+main.filler_unbinding = 'pinv'
+main.role_unbinding = 'pinv'
+main.role_pinv_regularization = 'l2'
+main.role_pinv_l2_lambda = 'auto'
+main.role_invariant = False
+main.eval_label_mode = 'filler_role'
+# Selected by experiments/llm_sentences_last_layer/scripts/summarize_sae_sweeps.py
+# run_id = qwen3_8b_mean_ridge_l2_1em2
+main.sae_output_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae/qwen3_8b'
+main.decoder_refinement = 'ridge'
+main.decoder_refinement_l2 = 1e-2
+main.decoder_bias_source = 'train_mean_target_embedding'

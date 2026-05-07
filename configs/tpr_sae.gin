@@ -1,0 +1,17 @@
+# Example gin config for constructing a TPR-based SAE with sentences dataset
+
+main.dataset_type = 'sentences'
+main.data_path = 'data/sentences_multiple'
+main.tpe_checkpoint_dir = 'experiments/sentences/checkpoints/modernbert/tpe/best_model'
+main.sae_output_dir = 'experiments/sae/results/modernbert'
+main.role_scheme = 'svo'
+main.batch_size = 32
+
+# Set these to use neural embeddings instead of TPE states
+main.embedding_model_name = 'nomic-ai/modernbert-embed-base'
+main.embedding_cache_path = 'data/sentences_multiple'
+
+main.sae_config = {
+    'sparsity_penalty': 0.0,
+    'dead_latent_threshold': 1e-6,
+}

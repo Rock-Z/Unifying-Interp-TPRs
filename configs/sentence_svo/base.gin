@@ -1,0 +1,79 @@
+# Example gin config for the combined train_sentences.py script
+
+# === Main Configuration for train_sentences.main ===
+main.sentences_path = 'data/sentences_multiple'
+main.role_scheme = 'svo'
+main.embedding_cache_path = 'data/sentences_multiple'
+
+# --- Skip training? ---
+main.skip_tpe = False
+main.skip_trainable_probe = False
+main.skip_analytic_probe = False
+
+# --- TPE Configuration ---
+main.tpe_config = {
+    # TensorProductEncoderConfig arguments (excluding hidden_size, n_fillers, n_roles - auto-computed)
+    # Example:
+    'filler_dim': 512,
+    'role_dim': 16,
+}
+main.tpe_training_args = @tpe/TrainingArguments()
+
+# --- Probe Configuration (for both trainable and analytic) ---
+main.role_for_probe = 0  # e.g., 0 for subject, 1 for verb, 2 for object (depends on dataset)
+main.probe_config_input = {
+    'encoder_model_type': 'sentence-transformers',
+    # num_labels and encoder_hidden_size are auto-computed
+}
+main.regularization_probe = 'l2'
+main.reg_param_probe = None  # If None, will be sqrt(tpe_eval_loss)
+
+# --- TrainingArguments for Trainable Probe ---
+main.probe_training_args = @trainable_probe/TrainingArguments()
+
+# --- TrainingArguments for Analytic Probe Evaluation ---
+# Can often reuse probe_training_args if only evaluation settings differ,
+# or define separately if more distinct settings are needed.
+main.analytic_training_args = @analytic_probe_eval/TrainingArguments()
+
+
+# === TrainingArguments Definitions ===
+
+# --- TPE Training Arguments ---
+tpe/TrainingArguments.num_train_epochs = 50
+tpe/TrainingArguments.learning_rate = 0.002
+tpe/TrainingArguments.per_device_train_batch_size = 256
+tpe/TrainingArguments.per_device_eval_batch_size = 256
+tpe/TrainingArguments.eval_strategy = 'epoch'
+tpe/TrainingArguments.save_strategy = 'epoch'
+tpe/TrainingArguments.load_best_model_at_end = True
+tpe/TrainingArguments.metric_for_best_model = 'eval_loss' # TPE typically minimizes loss
+tpe/TrainingArguments.greater_is_better = False
+tpe/TrainingArguments.save_total_limit = 1
+tpe/TrainingArguments.remove_unused_columns = False
+tpe/TrainingArguments.label_names = ['target_embeddings']
+tpe/TrainingArguments.report_to = 'none' # or 'wandb', 'tensorboard'
+
+# --- Trainable Probe Training Arguments ---
+trainable_probe/TrainingArguments.num_train_epochs = 50
+trainable_probe/TrainingArguments.learning_rate = 0.01
+trainable_probe/TrainingArguments.per_device_train_batch_size = 256
+trainable_probe/TrainingArguments.per_device_eval_batch_size = 256
+trainable_probe/TrainingArguments.lr_scheduler_type = 'cosine'
+trainable_probe/TrainingArguments.eval_strategy = 'epoch'
+trainable_probe/TrainingArguments.save_strategy = 'epoch'
+trainable_probe/TrainingArguments.load_best_model_at_end = True
+trainable_probe/TrainingArguments.metric_for_best_model = 'eval_subj_accuracy' # Or 'eval_accuracy' if only one eval set for probe
+trainable_probe/TrainingArguments.greater_is_better = True
+trainable_probe/TrainingArguments.save_total_limit = 1
+trainable_probe/TrainingArguments.remove_unused_columns = False
+trainable_probe/TrainingArguments.report_to = 'none'
+
+# --- Analytic Probe Evaluation Arguments ---
+# These are primarily for controlling evaluation behavior, not training.
+analytic_probe_eval/TrainingArguments.output_dir = 'experiments/sentences/checkpoints/analytic_probe_eval'
+# No training epochs, learning rate etc. needed for analytic probe evaluation.
+analytic_probe_eval/TrainingArguments.per_device_eval_batch_size = 256
+analytic_probe_eval/TrainingArguments.remove_unused_columns = False
+analytic_probe_eval/TrainingArguments.report_to = 'none'
+# metric_for_best_model, load_best_model_at_end, etc. are not relevant here as it's just evaluation.

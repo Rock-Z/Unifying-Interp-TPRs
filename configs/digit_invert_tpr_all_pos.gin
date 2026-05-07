@@ -1,0 +1,32 @@
+# Example gin config for probe_compare_all_pos logic
+main.data_paths_dict = {
+    'train': 'data/digits/copy_vocab_20_length_6.train',
+    'valid': 'data/digits/copy_vocab_20_length_6.valid',
+    'test': 'data/digits/copy_vocab_20_length_6.test'
+}
+main.seq2seq_path = 'checkpoints/digits/seq2seq/copy_best'
+main.tpe_path = 'checkpoints/digits/tpe/copy_best'
+main.regularization = 'l2'
+main.reg_param = 5.0
+#main.role_sweep_range = [-7, -6, -5, -4, -3, -2]
+main.role_sweep_range = [1, 2, 3, 4, 5, 6]
+
+evaluate_probes_for_role.analytic_training_args = @analytic/TrainingArguments()
+
+analytic/TrainingArguments.output_dir = './checkpoints/'
+analytic/TrainingArguments.per_device_eval_batch_size = 32
+analytic/TrainingArguments.remove_unused_columns = False
+analytic/TrainingArguments.report_to = 'none'
+
+evaluate_probes_for_role.trainable_training_args = @trainable/TrainingArguments()
+
+trainable/TrainingArguments.output_dir = './checkpoints/trainable_probe/'
+trainable/TrainingArguments.save_total_limit = 0
+trainable/TrainingArguments.per_device_train_batch_size = 256
+trainable/TrainingArguments.per_device_eval_batch_size = 256
+trainable/TrainingArguments.num_train_epochs = 5
+trainable/TrainingArguments.learning_rate = 5e-3
+trainable/TrainingArguments.logging_dir = './logs'
+trainable/TrainingArguments.save_strategy = 'epoch'
+trainable/TrainingArguments.remove_unused_columns = False
+trainable/TrainingArguments.report_to = 'none'

@@ -1,0 +1,66 @@
+# Shared TPE retraining base for punctuated SVO, final-layer LLM punctuation embeddings.
+
+main.sentences_path = 'data/sentences'
+main.embedding_cache_path = 'data/sentences'
+main.embedding_model_name = '__OVERRIDE_MODEL__'
+main.role_scheme = 'svo'
+main.role_for_probe = 0
+main.random_seed = 42
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'
+
+main.skip_tpe = False
+main.skip_trainable_probe = True
+main.skip_analytic_probe = True
+main.tpe_decoding_loss = False
+main.tpe_back_projection = False
+main.use_wandb = False
+
+main.tpe_config = {
+    'filler_dim': 256,
+    'role_dim': 4,
+    'role_id': 0,
+    'train_inverse_layer': False,
+}
+
+main.tpe_probe_config = {
+    'filler_unbinding': 'pinv',
+    'role_unbinding': 'pinv',
+}
+
+main.tpe_training_args = @tpe/TrainingArguments()
+tpe/TrainingArguments.output_dir = '__OVERRIDE_OUTPUT__'
+tpe/TrainingArguments.learning_rate = 0.001
+tpe/TrainingArguments.weight_decay = 0.0
+tpe/TrainingArguments.warmup_ratio = 0.0
+tpe/TrainingArguments.per_device_train_batch_size = 256
+tpe/TrainingArguments.per_device_eval_batch_size = 256
+tpe/TrainingArguments.num_train_epochs = 100
+tpe/TrainingArguments.do_train = True
+tpe/TrainingArguments.do_eval = True
+tpe/TrainingArguments.eval_strategy = 'epoch'
+tpe/TrainingArguments.save_strategy = 'no'
+tpe/TrainingArguments.load_best_model_at_end = False
+tpe/TrainingArguments.metric_for_best_model = None
+tpe/TrainingArguments.greater_is_better = None
+tpe/TrainingArguments.lr_scheduler_type = 'linear'
+tpe/TrainingArguments.logging_strategy = 'steps'
+tpe/TrainingArguments.logging_steps = 50
+tpe/TrainingArguments.remove_unused_columns = False
+tpe/TrainingArguments.report_to = 'none'
+
+main.analytic_training_args = @analytic_probe_eval/TrainingArguments()
+analytic_probe_eval/TrainingArguments.output_dir = '__OVERRIDE_ANALYTIC__'
+analytic_probe_eval/TrainingArguments.do_train = False
+analytic_probe_eval/TrainingArguments.do_eval = False
+analytic_probe_eval/TrainingArguments.per_device_eval_batch_size = 256
+analytic_probe_eval/TrainingArguments.remove_unused_columns = False
+analytic_probe_eval/TrainingArguments.report_to = 'none'
+
+main.probe_training_args = @trainable_probe/TrainingArguments()
+trainable_probe/TrainingArguments.output_dir = '__OVERRIDE_PROBE__'
+trainable_probe/TrainingArguments.do_train = False
+trainable_probe/TrainingArguments.do_eval = False
+trainable_probe/TrainingArguments.remove_unused_columns = False
+trainable_probe/TrainingArguments.report_to = 'none'

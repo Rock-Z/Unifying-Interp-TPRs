@@ -1,0 +1,14 @@
+# Layerwise ModelBatch TPE training for openai/gpt-oss-20b (all decoder layers).
+include 'experiments/layerwise_decoder_tpe/configs/layerwise_tpe_modelbatch_base.gin'
+
+main.embedding_model_name = 'openai/gpt-oss-20b'
+
+main.tpe_config = {
+    'filler_dim': 256,
+    'role_dim': 4,
+    'aggregation': 'sum',
+    'has_linear_layer': True,
+}
+
+layerwise_tpe/TrainingArguments.output_dir = './experiments/layerwise_decoder_tpe/checkpoints/openai_gpt-oss-20b_layers_all_modelbatch'
+layerwise_tpe/TrainingArguments.learning_rate = 0.001

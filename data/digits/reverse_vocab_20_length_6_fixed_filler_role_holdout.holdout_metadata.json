@@ -1,0 +1,74 @@
+{
+  "holdout_pairs": [
+    {
+      "filler": 2,
+      "position": 1
+    },
+    {
+      "filler": 7,
+      "position": 2
+    },
+    {
+      "filler": 13,
+      "position": 3
+    },
+    {
+      "filler": 4,
+      "position": 4
+    },
+    {
+      "filler": 18,
+      "position": 5
+    },
+    {
+      "filler": 10,
+      "position": 6
+    }
+  ],
+  "split_sizes": {
+    "train": 40000,
+    "valid": 5000,
+    "test": 5000,
+    "generalization": 5000
+  },
+  "examples_with_holdout_pair": {
+    "train": 0,
+    "valid": 0,
+    "test": 0,
+    "generalization": 5000
+  },
+  "heldout_pair_occurrences": {
+    "train": {
+      "2@1": 0,
+      "7@2": 0,
+      "13@3": 0,
+      "4@4": 0,
+      "18@5": 0,
+      "10@6": 0
+    },
+    "valid": {
+      "2@1": 0,
+      "7@2": 0,
+      "13@3": 0,
+      "4@4": 0,
+      "18@5": 0,
+      "10@6": 0
+    },
+    "test": {
+      "2@1": 0,
+      "7@2": 0,
+      "13@3": 0,
+      "4@4": 0,
+      "18@5": 0,
+      "10@6": 0
+    },
+    "generalization": {
+      "2@1": 945,
+      "7@2": 928,
+      "13@3": 861,
+      "4@4": 946,
+      "18@5": 1015,
+      "10@6": 938
+    }
+  }
+}

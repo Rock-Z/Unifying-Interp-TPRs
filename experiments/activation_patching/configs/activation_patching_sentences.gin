@@ -1,0 +1,12 @@
+# Gin config for token-level activation patching on SVO sentences
+
+activation_patching.run_activation_patching.sentences_path = 'data/sentences/data.test'
+activation_patching.run_activation_patching.output_dir = 'results/activation_patching/qwen3-8b'
+activation_patching.run_activation_patching.model_id = 'Qwen/Qwen3-8B'
+activation_patching.run_activation_patching.device = 'cuda'
+activation_patching.run_activation_patching.dtype = 'bfloat16'
+activation_patching.run_activation_patching.max_trials = 12
+activation_patching.run_activation_patching.token_focus = 'all'
+activation_patching.run_activation_patching.layer_indices = None
+activation_patching.run_activation_patching.explicit_token_positions = None
+activation_patching.run_activation_patching.random_seed = 7

@@ -1,0 +1,8 @@
+# Example configuration for analogy evaluation on sentence embeddings
+main.sentences_path = 'data/sentences_multiple'
+main.embedding_cache_path = 'data/sentences_multiple'
+main.role_scheme = 'svo'
+main.max_analogies = None
+main.output_path = './results/analogy_results.json'
+main.random_seed = 42
+main.verbose = True

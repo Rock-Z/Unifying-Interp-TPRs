@@ -1,0 +1,25 @@
+main.tpe_checkpoint_dir = 'experiments/llm_sentences_last_layer/checkpoints/tpe/gpt_oss_20b/best_model'
+main.sae_output_dir = 'experiments/llm_sentences_last_layer/checkpoints/sae/gpt_oss_20b'
+main.data_path = 'data/sentences'
+main.dataset_type = 'sentences'
+main.role_scheme = 'svo'
+main.batch_size = 256
+main.embedding_model_name = 'openai/gpt-oss-20b'
+main.embedding_cache_path = 'data/sentences'
+
+load_dataset_with_embeddings.encoder_model_type = 'decoder-only-punct'
+load_dataset_with_embeddings.device = 'cpu'
+
+main.sae_config = {
+    'sparsity_penalty': 0.0,
+    'dead_latent_threshold': 0.01,
+}
+
+main.tpe_output_layer_regularization = 'l2'
+main.tpe_output_layer_regularization_value = 'auto'
+main.filler_unbinding = 'pinv'
+main.role_unbinding = 'pinv'
+main.role_pinv_regularization = 'l2'
+main.role_pinv_l2_lambda = 'auto'
+main.role_invariant = False
+main.eval_label_mode = 'filler_role'

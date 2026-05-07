@@ -1,0 +1,10 @@
+include 'experiments/sentences/configs/embeddinggemma_multiple_verbs.gin'
+
+main.sentences_path = 'data/sentences_multiple_filler_role_holdout'
+main.embedding_cache_path = 'data/sentences_multiple_filler_role_holdout'
+main.skip_trainable_probe = True
+main.skip_analytic_probe = True
+
+tpe/TrainingArguments.output_dir = 'experiments/sentences/filler_role_holdout/checkpoints/embeddinggemma/tpe'
+trainable_probe/TrainingArguments.output_dir = 'experiments/sentences/filler_role_holdout/checkpoints/embeddinggemma/probe'
+analytic_probe_eval/TrainingArguments.output_dir = 'experiments/sentences/filler_role_holdout/checkpoints/embeddinggemma/analytic'

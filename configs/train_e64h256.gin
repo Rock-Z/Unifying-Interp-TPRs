@@ -1,0 +1,62 @@
+# Shared configurations
+
+seq2seq_init.encoder_config = {
+    'architecture': 'GRU',
+    'embedding_size': 64,
+    'hidden_size': 256,
+    'n_layers': 1,
+    'dropout': 0
+}
+
+seq2seq_init.decoder_config = {
+    'architecture': 'GRU',
+    'embedding_size': 64,
+    'hidden_size': 256,
+    'n_layers': 1,
+    'dropout': 0
+}
+
+get_roles.role_scheme = 'r2l'
+
+main.seq2seq_training_args = @seq2seq/Seq2SeqTrainingArguments()
+seq2seq/Seq2SeqTrainingArguments.output_dir = './checkpoints/seq2seq'
+seq2seq/Seq2SeqTrainingArguments.save_total_limit = 1
+seq2seq/Seq2SeqTrainingArguments.num_train_epochs = 40
+seq2seq/Seq2SeqTrainingArguments.learning_rate = 0.001
+seq2seq/Seq2SeqTrainingArguments.per_device_train_batch_size = 256
+seq2seq/Seq2SeqTrainingArguments.per_device_eval_batch_size = 256
+seq2seq/Seq2SeqTrainingArguments.warmup_steps = 100
+seq2seq/Seq2SeqTrainingArguments.eval_strategy = 'epoch'
+seq2seq/Seq2SeqTrainingArguments.save_strategy = 'epoch'
+seq2seq/Seq2SeqTrainingArguments.predict_with_generate = True
+seq2seq/Seq2SeqTrainingArguments.generation_max_length = 10
+seq2seq/Seq2SeqTrainingArguments.remove_unused_columns = False
+seq2seq/Seq2SeqTrainingArguments.metric_for_best_model = 'eval_sequence_accuracy'
+seq2seq/Seq2SeqTrainingArguments.greater_is_better = True
+seq2seq/Seq2SeqTrainingArguments.report_to = 'none'
+
+main.tpe_config = {
+    'hidden_size': 256,
+    'n_roles': 20,
+    'filler_dim': 64,
+    'role_dim': 64,
+    'role_pad_token_id': 0,
+}
+
+main.tpe_training_args = @tpe/TrainingArguments()
+tpe/TrainingArguments.output_dir = './checkpoints/tpe'
+tpe/TrainingArguments.save_total_limit = 1
+tpe/TrainingArguments.num_train_epochs = 40
+tpe/TrainingArguments.learning_rate = 0.001
+tpe/TrainingArguments.lr_scheduler_type = 'constant'
+tpe/TrainingArguments.per_device_train_batch_size = 64
+tpe/TrainingArguments.per_device_eval_batch_size = 64
+tpe/TrainingArguments.warmup_steps = 100
+tpe/TrainingArguments.weight_decay = 0.01
+tpe/TrainingArguments.eval_strategy = 'epoch'
+tpe/TrainingArguments.save_strategy = 'epoch'
+tpe/TrainingArguments.remove_unused_columns = False
+tpe/TrainingArguments.metric_for_best_model = 'eval_loss'
+tpe/TrainingArguments.greater_is_better = False
+tpe/TrainingArguments.load_best_model_at_end = True
+tpe/TrainingArguments.report_to = 'none'

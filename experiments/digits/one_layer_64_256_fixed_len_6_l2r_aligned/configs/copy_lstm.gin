@@ -1,0 +1,8 @@
+include 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/configs/includes/common_base.gin'
+include 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/configs/includes/task_copy.gin'
+include 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/configs/includes/lstm_base.gin'
+
+seq2seq/Seq2SeqTrainingArguments.output_dir = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/seq2seq/copy/lstm'
+tpe/TrainingArguments.output_dir = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/tpe/copy/lstm'
+tpe_eval/Seq2SeqTrainingArguments.output_dir = 'experiments/digits/one_layer_64_256_fixed_len_6_l2r_aligned/checkpoints/tpe/copy/lstm'
+

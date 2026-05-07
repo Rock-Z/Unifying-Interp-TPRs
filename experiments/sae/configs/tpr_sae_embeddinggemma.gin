@@ -1,0 +1,28 @@
+# Analytic TPE->SAE construction (EmbeddingGemma, sentences_multiple)
+
+main.dataset_type = 'sentences'
+main.data_path = 'data/sentences_multiple'
+main.role_scheme = 'svo'
+main.batch_size = 32
+
+main.tpe_checkpoint_dir = 'experiments/sentences/checkpoints/embeddinggemma/tpe/best_model'
+main.sae_output_dir = 'experiments/sae/results/embeddinggemma'
+
+main.embedding_model_name = 'google/embeddinggemma-300m'
+main.embedding_cache_path = 'data/sentences_multiple'
+
+main.sae_config = {
+    'sparsity_penalty': 0.0,
+    'dead_latent_threshold': 0.01,
+}
+
+main.tpe_output_layer_regularization = 'l2'
+main.tpe_output_layer_regularization_value = 'auto'
+main.filler_unbinding = 'pinv'
+main.role_unbinding = 'pinv'
+main.role_pinv_regularization = 'l2'
+main.role_pinv_l2_lambda = 0.1
+main.role_invariant = False
+main.first_layer_construction = 'unbinding'
+main.second_layer_construction = 'pinv-unbinding'
+main.eval_label_mode = 'filler_role'

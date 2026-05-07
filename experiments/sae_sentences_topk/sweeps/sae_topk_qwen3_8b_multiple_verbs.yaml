@@ -1,0 +1,63 @@
+project: sae-sentences-topk-multiple-verbs-qwen3-embedding-8b
+name: sae-topk-multiple-verbs-qwen3-embedding-8b
+method: bayes
+metric:
+  name: avg_feature_well_rankedness
+  goal: maximize
+parameters:
+  sae_lr:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 5e-3
+  sae_resample_times:
+    values: [2, 5, 8]
+  sae_k:
+    values: [8, 16, 32]
+  sae_hidden_dim:
+    values: [256, 512, 1024]
+  sae_batch:
+    values: [128, 256]
+command:
+  - ${env}
+  - uv
+  - run
+  - scripts/wandb_script_launcher.py
+  - src/train_sae.py
+  - experiments/sae_sentences_topk/sweeps/sae_topk_qwen3_8b_multiple_verbs.yaml
+  - --sae_lr=${sae_lr}
+  - --sae_resample_times=${sae_resample_times}
+  - --sae_k=${sae_k}
+  - --sae_hidden_dim=${sae_hidden_dim}
+  - --sae_batch=${sae_batch}
+gin_template: |
+  # TopK SAE training config for Qwen3-Embedding-8B sentence embeddings (multiple-verbs)
+  main.dataset_type = 'sentences'
+  main.sentences_path = 'data/sentences_multiple'
+  main.embedding_model_name = 'Qwen/Qwen3-Embedding-8B'
+  main.embedding_cache_path = 'data/sentences_multiple'
+  main.role_scheme = 'svo'
+
+  main.sae_config = {
+      'hidden_dim': $sae_hidden_dim,
+      'k': $sae_k,
+      'dead_latent_threshold': 1e-6,
+  }
+
+  main.training_args = @train/TrainingArguments()
+
+  train/TrainingArguments.output_dir = 'experiments/sae_sentences_topk/checkpoints/qwen3-embedding-8b/run-$wandb_run_id'
+  train/TrainingArguments.learning_rate = $sae_lr
+  train/TrainingArguments.warmup_ratio = 0.05
+  train/TrainingArguments.num_train_epochs = 200
+  train/TrainingArguments.save_total_limit = 1
+  train/TrainingArguments.per_device_train_batch_size = $sae_batch
+  train/TrainingArguments.per_device_eval_batch_size = 512
+  train/TrainingArguments.eval_strategy = 'epoch'
+  train/TrainingArguments.save_strategy = 'epoch'
+  train/TrainingArguments.remove_unused_columns = False
+  train/TrainingArguments.report_to = 'wandb'
+  train/TrainingArguments.label_names = ['inputs_embeds']
+  train/TrainingArguments.logging_dir = 'experiments/sae_sentences_topk/checkpoints/qwen3-embedding-8b/run-$wandb_run_id/logs'
+
+  main.resample_times = $sae_resample_times
+  main.resample_threshold = 1
